@@ -26,13 +26,13 @@ function hantei() {
 for( var kaisu of lists ) {
 console.log(kaisu + "回目の予想: " + 4);
 if (kaisu > 4) {
-     console.log("答えは" + kotae + "です。回数制限");
+     console.log("答えは" + kotae +"でした．すでにゲームは終わっています");
 } else if (kotae === 4 ) {
         console.log("正解です．おめでとう!");
     } else if (kotae > 4){
-            console.log("まちがい、もっとおおきく!");
+            console.log("まちがい、答えはもっと大きいですよ");
     } else {
-            console.log("まちがい、もっとちいさく!");
+            console.log("まちがい、答えはもっと小さいですよ");
     }
 }
 }
