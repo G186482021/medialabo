@@ -47,7 +47,5 @@ let data = {
 
 ////////// 課題3-2 ここからプログラムを書こう
 
-for (let x of data) {
-  console.log(x);
-}
-console.log("as");
+
+  console.log(data);
