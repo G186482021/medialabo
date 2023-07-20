@@ -1,64 +1,55 @@
-let data = {
-  "coord": {
-    "lon": 116.3972,
-    "lat": 39.9075
-  },
-  "weather": [
-    {
-      "id": 803,
-      "main": "Clouds",
-      "description": "曇りがち",
-      "icon": "04d"
-    }
-  ],
-  "base": "stations",
-  "main": {
-    "temp": 9.94,
-    "feels_like": 8.65,
-    "temp_min": 9.94,
-    "temp_max": 9.94,
-    "pressure": 1022,
-    "humidity": 14,
-    "sea_level": 1022,
-    "grnd_level": 1016
-  },
-  "visibility": 10000,
-  "wind": {
-    "speed": 2.65,
-    "deg": 197,
-    "gust": 4.84
-  },
-  "clouds": {
-    "all": 53
-  },
-  "dt": 1646542386,
-  "sys": {
-    "type": 1,
-    "id": 9609,
-    "country": "CN",
-    "sunrise": 1646520066,
-    "sunset": 1646561447
-  },
-  "timezone": 28800,
-  "id": 1816670,
-  "name": "北京市",
-  "cod": 200
-};
+
 
 ////////// 課題3-2 ここからプログラムを書こう
 
+let x = document.querySelector('button#btn');
+x.addEventListener('click', showSelectResult);
 
-  console.log(data);
+function showSelectResult() {
+    let s = document.querySelector('select#toshi');
+    let idx = s.selectedIndex;  // idx 番目の option が選択された
+
+    let os = s.querySelectorAll('option');  // s の子要素 option をすべて検索
+    let o = os.item(idx);       // os の idx 番目の要素
+    let aaa = o.getAttribute('value');
+
+    console.log('選択された ' + idx + ' 番目の都市の情報:');
+    console.log(o.textContent)
+    console.log(' id : ' + aaa);  // id 属性を表示
+
+
+
+
+
+  let url = 'https://www.nishita-lab.org/web-contents/jsons/openweather/' + aaa + '.json';
+  axios.get(url).then(showResult).catch(showError).then(finish);
+
+
+
+}
+function showResult(resp) {
+  let data = resp.data;
+  if (typeof data === 'string') {
+    data = JSON.parse(data);
+}
+console.log(data);
+console.log(data.id);
+}
+function showError(err) {
+  console.log(err);
+}
+function finish() {
+  console.log('Ajax 通信が終わりました');
+}
+
 
 
   let div = document.querySelector('div#result');
 
-
-
-
   let a1 = document.createElement('h1');
-  a1.textContent = '北京市';  
+  a1.textContent = (object.name);  
   div.insertAdjacentElement('beforeend', a1);
+
 
 
 
@@ -128,17 +119,31 @@ let data = {
 
 
   
-  let x = document.querySelector('button#btn');
-x.addEventListener('click', showSelectResult);
 
-function showSelectResult() {
-    let s = document.querySelector('select#santaro');
-    let idx = s.selectedIndex;  // idx 番目の option が選択された
 
-    let os = s.querySelectorAll('option');  // s の子要素 option をすべて検索
-    let o = os.item(idx);       // os の idx 番目の要素
 
-    console.log('選択された ' + idx + ' 番目の option の情報:');
-    console.log('  value=' + o.getAttribute('value'));  // id 属性を表示
-    console.log('  textContent='+o.textContent);
-}
+
+
+
+//https://www.nishita-lab.org/web-contents/jsons/openweather/{360630}.json ... Cairo カイロ （エジプト）
+//https://www.nishita-lab.org/web-contents/jsons/openweather/{524901}.json ... Moscow モスクワ （ロシア）
+//https://www.nishita-lab.org/web-contents/jsons/openweather/{993800}.json ... Johannesburg ヨハネスブルク （南アフリカ）
+//https://www.nishita-lab.org/web-contents/jsons/openweather/{1816670}.json ... Beijing 北京 （中華人民共和国）
+//https://www.nishita-lab.org/web-contents/jsons/openweather/{1850147}.json... Tokyo 東京 （日本）
+//https://www.nishita-lab.org/web-contents/jsons/openweather/{1880252}.json ... Singapore シンガポール
+//https://www.nishita-lab.org/web-contents/jsons/openweather/{2147714}.json ... Sydney シドニー （オーストラリア）
+//https://www.nishita-lab.org/web-contents/jsons/openweather/{2643743}.json ... London ロンドン （イギリス
+//https://www.nishita-lab.org/web-contents/jsons/openweather/{2968815}.json ... Paris パリ （フランス）
+//https://www.nishita-lab.org/web-contents/jsons/openweather/{3451189}.json ... Rio de Janeiro リオデジャネイロ （ブラジル）
+//https://www.nishita-lab.org/web-contents/jsons/openweather/{5128581}.json ... New York ニューヨーク （アメリカ合衆国）
+//https://www.nishita-lab.org/web-contents/jsons/openweather/{5368361}.json ... Los Angeles ロサンゼルス （アメリカ合衆国）
+
+//coord.lon	緯度
+//coord.lat	経度
+//weather.description	天気
+//main.temp_min	最低気温
+//main.temp_max	最高気温
+//main.humidity	湿度
+//wind.speed	風速
+//wind.deg	風向
+//name	都市名

@@ -39,6 +39,7 @@ p.insertAdjacentElement('afterend', img);
 p.insertAdjacentElement('beforeend', img);
 img.setAttribute('src', 'jiro.png');
 
+
 p = document.createElement('p');  
 div.insertAdjacentElement('afterend', p); 
 div.insertAdjacentElement('beforeend', p); 
@@ -55,5 +56,18 @@ a.remove();
 }
 
 
+
 // 練習4-5 箇条書き追加プログラム
+let ul = document.querySelector('ul#location');
+
+for (let n of data) {
+	let na = document.createElement('li');
+    ul.insertAdjacentElement('beforeend', na);
+
+	let x = data.name
+	let y = data.lat
+	let z = data.lng
+
+    na.textContent = x + '...ああ　' + y + 'いい　' + z
+}
 
