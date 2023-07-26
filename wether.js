@@ -32,20 +32,20 @@ function showSelectResult() {
 
 
 function showResult(resp) {
-  let dataa = resp.dataa;
+  let data = resp.data;
   if (typeof data === 'string') {
-    data = JSON.parse(dataa);
+    data = JSON.parse(data);
 }
-console.log(dataa);
-console.log(dataa.name);
-console.log('天気'+ dataa.weather.description);
-console.log('緯度'+ dataa.coord.lon);
-console.log('経度'+ dataa.coord.lat);
-console.log('最高気温'+ dataa.main.temp_min);
-console.log('最低気温'+ dataa.main.temp_max);
-console.log('湿度'+ dataa.main.humidity);
-console.log('風速'+ dataa.wind.speed);
-console.log('風向き'+ dataa.wind.deg);
+console.log(data);
+console.log(data.name);
+console.log('天気'+ data.weather.description);
+console.log('緯度'+ data.coord.lon);
+console.log('経度'+ data.coord.lat);
+console.log('最高気温'+ data.main.temp_min);
+console.log('最低気温'+ data.main.temp_max);
+console.log('湿度'+ data.main.humidity);
+console.log('風速'+ data.wind.speed);
+console.log('風向き'+ data.wind.deg);
 }
 function showError(err) {
   console.log(err);
@@ -54,8 +54,8 @@ function finish() {
   console.log('Ajax 通信が終わりました');
 }
 
-function showResult(respo) {
-  let data = respo.data;
+function showResult(resp) {
+  let data = resp.data;
   if (typeof data === 'string') {
     data = JSON.parse(data);
 }
