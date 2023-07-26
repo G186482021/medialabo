@@ -28,22 +28,22 @@ function hantei() {
     let z = document.querySelector('span#kaisu');
   
   
-    if(kaisu < 4) {
+    if( kaisu < 3) {
           if(kotae == yoso){
-                  x.textContent = "正解";
+                  x.textContent = "正解です。おめでとう！";
           } else if(kotae < yoso) {
-                  x.textContent = "間違い大きい";
+                  x.textContent = "まちがい、答えはもっと小さいですよ。";
           } else {
-                  x.textContent = "間違い小さい";
+                  x.textContent = "まちがい、答えはもっと大きいですよ。";
           }
-   } else {
-       x.textContent = "回数制限";
-   }	
+    if(kaisu == 3 && kotae != yoso) {
+        x.textContent = "まちがい。残念でした答えは "+ kotae +" です。";
 }
-
-
-
-  
-  // 課題3-1: 正解判定する
-  // kotae と yoso が一致するかどうか調べて結果を出力
-  // 課題3-1における出力先はコンソ
+        }
+    if(kaisu >= 4) {
+        x.textContent = "答えは"+ kotae + "でした。すでにゲームは終わっています。";
+   }
+    if(kaisu == 3) {
+        x.textContent = "まちがい。残念でした答えは "+ kotae +" です。";
+    }
+}
