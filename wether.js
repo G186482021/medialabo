@@ -6,6 +6,10 @@ let x = document.querySelector('button#btn');
 x.addEventListener('click', showSelectResult);
 
 function showSelectResult() {
+  var list = document.querySelectorAll('div#result >*'); 
+  for(var a of list) {
+    a.remove();
+    }
     let s = document.querySelector('select#toshi');
     let idx = s.selectedIndex;  // idx 番目の option が選択された
 
@@ -24,16 +28,24 @@ function showSelectResult() {
   let url = 'https://www.nishita-lab.org/web-contents/jsons/openweather/' + aaa + '.json';
   axios.get(url).then(showResult).catch(showError).then(finish);
 
-
-
 }
+
+
 function showResult(resp) {
-  let data = resp.data;
+  let dataa = resp.dataa;
   if (typeof data === 'string') {
-    data = JSON.parse(data);
+    data = JSON.parse(dataa);
 }
-console.log(data);
-console.log(data.id);
+console.log(dataa);
+console.log(dataa.name);
+console.log('天気'+ dataa.weather.description);
+console.log('緯度'+ dataa.coord.lon);
+console.log('経度'+ dataa.coord.lat);
+console.log('最高気温'+ dataa.main.temp_min);
+console.log('最低気温'+ dataa.main.temp_max);
+console.log('湿度'+ dataa.main.humidity);
+console.log('風速'+ dataa.wind.speed);
+console.log('風向き'+ dataa.wind.deg);
 }
 function showError(err) {
   console.log(err);
@@ -42,12 +54,17 @@ function finish() {
   console.log('Ajax 通信が終わりました');
 }
 
-
+function showResult(respo) {
+  let data = respo.data;
+  if (typeof data === 'string') {
+    data = JSON.parse(data);
+}
 
   let div = document.querySelector('div#result');
 
   let a1 = document.createElement('h1');
-  a1.textContent = (object.name);  
+
+  a1.textContent = (data.name);  
   div.insertAdjacentElement('beforeend', a1);
 
 
@@ -59,7 +76,7 @@ function finish() {
   div.insertAdjacentElement('beforeend', a2);
 
   let b1 = document.createElement('p');
-  b1.textContent = '曇りがち';  
+  b1.textContent = data.weather[0].description ;  
   div.insertAdjacentElement('beforeend', b1);
 
 
@@ -74,7 +91,7 @@ function finish() {
   div.insertAdjacentElement('beforeend', a4);
 
   let b2 = document.createElement('p');
-  b2.textContent = '9.94';  
+  b2.textContent = data.main.temp_min;  
   div.insertAdjacentElement('beforeend', b2);
 
 
@@ -83,7 +100,7 @@ function finish() {
   div.insertAdjacentElement('beforeend', a5);
 
   let b3 = document.createElement('p');
-  b3.textContent = '9.94';  
+  b3.textContent = data.main.temp_max;  
   div.insertAdjacentElement('beforeend', b3);
 
 
@@ -93,7 +110,7 @@ function finish() {
   div.insertAdjacentElement('beforeend', a6);
 
   let b4 = document.createElement('p');
-  b4.textContent = '14';  
+  b4.textContent = data.main.humidity;  
   div.insertAdjacentElement('beforeend', b4);
 
 
@@ -103,7 +120,7 @@ function finish() {
   div.insertAdjacentElement('beforeend', a7);
 
   let b5 = document.createElement('p');
-  b5.textContent = '2.65・197';  
+  b5.textContent = data.wind.speed +'/'+  data.wind.deg;  
   div.insertAdjacentElement('beforeend', b5);
 
 
@@ -113,37 +130,10 @@ function finish() {
   div.insertAdjacentElement('beforeend', a8);
 
   let b6 = document.createElement('p');
-  b6.textContent = '39.9075・116.3972';  
+  b6.textContent = data.coord.lon +'/'+ data.coord.lat;  
   div.insertAdjacentElement('beforeend', b6);
 
 
-
+}
   
 
-
-
-
-
-
-//https://www.nishita-lab.org/web-contents/jsons/openweather/{360630}.json ... Cairo カイロ （エジプト）
-//https://www.nishita-lab.org/web-contents/jsons/openweather/{524901}.json ... Moscow モスクワ （ロシア）
-//https://www.nishita-lab.org/web-contents/jsons/openweather/{993800}.json ... Johannesburg ヨハネスブルク （南アフリカ）
-//https://www.nishita-lab.org/web-contents/jsons/openweather/{1816670}.json ... Beijing 北京 （中華人民共和国）
-//https://www.nishita-lab.org/web-contents/jsons/openweather/{1850147}.json... Tokyo 東京 （日本）
-//https://www.nishita-lab.org/web-contents/jsons/openweather/{1880252}.json ... Singapore シンガポール
-//https://www.nishita-lab.org/web-contents/jsons/openweather/{2147714}.json ... Sydney シドニー （オーストラリア）
-//https://www.nishita-lab.org/web-contents/jsons/openweather/{2643743}.json ... London ロンドン （イギリス
-//https://www.nishita-lab.org/web-contents/jsons/openweather/{2968815}.json ... Paris パリ （フランス）
-//https://www.nishita-lab.org/web-contents/jsons/openweather/{3451189}.json ... Rio de Janeiro リオデジャネイロ （ブラジル）
-//https://www.nishita-lab.org/web-contents/jsons/openweather/{5128581}.json ... New York ニューヨーク （アメリカ合衆国）
-//https://www.nishita-lab.org/web-contents/jsons/openweather/{5368361}.json ... Los Angeles ロサンゼルス （アメリカ合衆国）
-
-//coord.lon	緯度
-//coord.lat	経度
-//weather.description	天気
-//main.temp_min	最低気温
-//main.temp_max	最高気温
-//main.humidity	湿度
-//wind.speed	風速
-//wind.deg	風向
-//name	都市名
